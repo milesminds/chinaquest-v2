@@ -577,6 +577,42 @@
             background: linear-gradient(135deg, var(--navy-primary), var(--navy-deep));
             color: var(--white);
             position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+        
+        .dest-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .dest-header.beijing::before {
+            background-image: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800');
+        }
+        
+        .dest-header.shanghai::before {
+            background-image: url('https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800');
+        }
+        
+        .dest-header.guangdong::before {
+            background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800');
+        }
+        
+        .dest-header.hongkong::before {
+            background-image: url('https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800');
+        }
+        
+        .dest-header > * {
+            position: relative;
+            z-index: 1;
         }
         
         .dest-chinese {
@@ -893,6 +929,18 @@
             }
         }
     </style>
+    
+    <!-- No-JS Fallback for Animations -->
+    <noscript>
+        <style>
+            .fade-in,
+            .slide-in-left,
+            .slide-in-right {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
 </head>
 <body>
     <!-- Navigation -->
@@ -1005,6 +1053,13 @@
                 <p class="section-desc">Built on two decades of experience in China, our team brings unparalleled knowledge, connections, and commitment to educational excellence.</p>
             </div>
 
+            <div class="expertise-detail" style="background: var(--white); padding: 2rem; border-left: 4px solid var(--gold-primary); margin-bottom: 3rem;">
+                <h4 style="color: var(--navy-primary); margin-bottom: 1rem;">Our Story</h4>
+                <p style="margin-bottom: 1rem;">Since 2005, Miles Minds has been helping people discover China—not as tourists, but as learners. What began as a consultancy supporting international organisations has evolved into a dedicated educational platform, designing immersive experiences for students, professionals, and institutions.</p>
+                <p style="margin-bottom: 1rem;">China Quest was born from a simple belief: young people deserve to understand the world they're inheriting. China is no longer distant or abstract—it's central to global economics, innovation, and culture. Our programmes bridge the gap between classroom theory and real-world understanding.</p>
+                <p style="margin: 0;">Every programme we design reflects our core values: curiosity, respect, and depth. We don't simplify China; we help students engage with its complexity. We don't just show sites; we facilitate meaningful encounters with ideas, people, and systems that shape our interconnected world.</p>
+            </div>
+
             <div class="expertise-stats">
                 <div class="expertise-stat">
                     <span class="expertise-number">2005</span>
@@ -1060,7 +1115,7 @@
 
             <div class="dest-grid">
                 <div class="dest-card">
-                    <div class="dest-header">
+                    <div class="dest-header beijing">
                         <div class="dest-chinese">京</div>
                         <h3 class="dest-name">Beijing</h3>
                         <p class="dest-subtitle">Imperial History • National Identity • Living Heritage</p>
@@ -1076,7 +1131,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header">
+                    <div class="dest-header shanghai">
                         <div class="dest-chinese">沪</div>
                         <h3 class="dest-name">Shanghai</h3>
                         <p class="dest-subtitle">Global City • Energy & Innovation • East-West Fusion</p>
@@ -1092,7 +1147,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header">
+                    <div class="dest-header guangdong">
                         <div class="dest-chinese">粤</div>
                         <h3 class="dest-name">Guangdong / Pearl River Delta</h3>
                         <p class="dest-subtitle">Innovation • Manufacturing • Southern Culture</p>
@@ -1108,7 +1163,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header">
+                    <div class="dest-header hongkong">
                         <div class="dest-chinese">港</div>
                         <h3 class="dest-name">Hong Kong</h3>
                         <p class="dest-subtitle">East Meets West • Sustainability • Global Finance</p>
@@ -1494,7 +1549,14 @@
                     <a href="#safety">Safety</a>
                     <a href="#contact">Contact</a>
                 </div>
-                <a href="/path/to/brochure.pdf" class="footer-cta" download>📥 Download Brochure</a>
+                <a href="../../02_文档/ChinaQuest_Product_Brochure.pdf" class="footer-cta" download>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Brochure
+                </a>
             </div>
 
             <div class="footer-bottom">
