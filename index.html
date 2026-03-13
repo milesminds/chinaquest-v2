@@ -131,11 +131,27 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .nav-menu a:hover {
             color: var(--gold-primary);
+        }
+        
+        .nav-menu a.active {
+            color: var(--gold-primary);
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            border-radius: 2px;
         }
         
         .nav-mobile-toggle {
@@ -491,6 +507,38 @@
             line-height: 1.6;
         }
         
+        /* Testimonial Quote Decoration */
+        .testimonial-quote {
+            position: relative;
+            padding: 1.5rem 0;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5rem;
+            left: -1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        
+        .testimonial-quote::after {
+            content: '"';
+            position: absolute;
+            bottom: -1.5rem;
+            right: -0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        
         /* Expertise Section */
         .expertise-stats {
             display: grid;
@@ -594,20 +642,12 @@
             z-index: 0;
         }
         
-        .dest-header.beijing::before {
-            background-image: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800');
-        }
-        
-        .dest-header.shanghai::before {
-            background-image: url('https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800');
-        }
-        
-        .dest-header.guangdong::before {
-            background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800');
-        }
-        
+        /* Destination background images loaded via lazy loading */
+        .dest-header.beijing::before,
+        .dest-header.shanghai::before,
+        .dest-header.guangdong::before,
         .dest-header.hongkong::before {
-            background-image: url('https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800');
+            background-image: none; /* Will be loaded lazily */
         }
         
         .dest-header > * {
@@ -928,6 +968,292 @@
                 gap: 1rem;
             }
         }
+        
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(27, 42, 74, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(100%);
+            transition: transform 0.4s ease-out;
+            border-top: 2px solid var(--gold-primary);
+        }
+        
+        .cookie-banner.visible {
+            transform: translateY(0);
+        }
+        
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-text {
+            flex: 1;
+            min-width: 300px;
+            color: var(--white);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .cookie-text p {
+            margin: 0;
+        }
+        
+        .cookie-text a {
+            color: var(--gold-primary);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        
+        .cookie-text a:hover {
+            color: var(--gold-soft);
+        }
+        
+        .cookie-actions {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .cookie-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .cookie-btn-accept {
+            background: var(--gold-primary);
+            color: var(--navy-primary);
+        }
+        
+        .cookie-btn-accept:hover {
+            background: var(--gold-soft);
+            transform: translateY(-1px);
+        }
+        
+        .cookie-btn-decline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cookie-btn-decline:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .cookie-banner {
+                padding: 1rem 1.5rem;
+            }
+            
+            .cookie-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .cookie-text {
+                min-width: auto;
+            }
+            
+            .cookie-actions {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .cookie-btn {
+                width: 100%;
+            }
+        }
+        
+        /* Privacy & Terms Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: var(--navy-primary);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold-primary);
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--white);
+        }
+        
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+            color: var(--text-primary);
+        }
+        
+        .modal-body h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--navy-primary);
+        }
+        
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+        
+        .modal-body p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .modal-body ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-overlay {
+                padding: 1rem;
+            }
+            
+            .modal-header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .modal-header h2 {
+                font-size: 20px;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 998;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(201, 169, 78, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--gold-soft);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(201, 169, 78, 0.5);
+        }
+        
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--navy-primary);
+            stroke-width: 2.5;
+            fill: none;
+        }
+        
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 48px;
+                height: 48px;
+            }
+            
+            .back-to-top svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
     </style>
     
     <!-- No-JS Fallback for Animations -->
@@ -941,6 +1267,83 @@
             }
         </style>
     </noscript>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "China Quest",
+        "description": "Immersive educational programmes for students aged 14-18, discovering China's innovation, culture, and global significance",
+        "url": "https://chinaquest.milesminds.com",
+        "logo": "https://chinaquest.milesminds.com/logo.png",
+        "foundingDate": "2005",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IE"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+353-87-775-8146",
+            "contactType": "Sales",
+            "email": "schools@chinaquest.milesminds.com",
+            "areaServed": "Europe",
+            "availableLanguage": ["English"]
+        },
+        "sameAs": [
+            "https://milesminds.com"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "China Quest Educational Programme",
+        "description": "5-14 day immersive educational journey across China's most dynamic cities for students aged 14-18",
+        "category": "Educational Travel Programme",
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student",
+            "audienceType": "Students aged 14-18"
+        },
+        "provider": {
+            "@type": "EducationalOrganization",
+            "name": "Miles Minds Limited",
+            "url": "https://milesminds.com"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "EUR",
+            "lowPrice": "2990",
+            "highPrice": "5990",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "EUR",
+                "price": "2990",
+                "description": "Starting price for 5-day module"
+            },
+            "availability": "https://schema.org/InStock",
+            "url": "https://chinaquest.milesminds.com#contact",
+            "validFrom": "2026-01-01"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "15"
+        },
+        "itemOffered": {
+            "@type": "Service",
+            "name": "China Quest Programme",
+            "serviceType": "Educational Travel",
+            "areaServed": {
+                "@type": "Country",
+                "name": "China"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1134,7 +1537,7 @@
 
             <div class="dest-grid">
                 <div class="dest-card">
-                    <div class="dest-header beijing">
+                    <div class="dest-header beijing" data-bg="url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800')">
                         <div class="dest-chinese">京</div>
                         <h3 class="dest-name">Beijing</h3>
                         <p class="dest-subtitle">Imperial History • National Identity • Living Heritage</p>
@@ -1150,7 +1553,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header shanghai">
+                    <div class="dest-header shanghai" data-bg="url('https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800')">
                         <div class="dest-chinese">沪</div>
                         <h3 class="dest-name">Shanghai</h3>
                         <p class="dest-subtitle">Global City • Energy & Innovation • East-West Fusion</p>
@@ -1166,7 +1569,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header guangdong">
+                    <div class="dest-header guangdong" data-bg="url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800')">
                         <div class="dest-chinese">粤</div>
                         <h3 class="dest-name">Guangdong / Pearl River Delta</h3>
                         <p class="dest-subtitle">Innovation • Manufacturing • Southern Culture</p>
@@ -1182,7 +1585,7 @@
                 </div>
 
                 <div class="dest-card">
-                    <div class="dest-header hongkong">
+                    <div class="dest-header hongkong" data-bg="url('https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800')">
                         <div class="dest-chinese">港</div>
                         <h3 class="dest-name">Hong Kong</h3>
                         <p class="dest-subtitle">East Meets West • Sustainability • Global Finance</p>
@@ -1440,19 +1843,19 @@
 
             <div class="cards-grid">
                 <div class="card">
-                    <p class="card-text" style="font-style: italic; margin-bottom: 1.5rem;">"China Quest offers exactly what we look for in educational travel: authentic cultural immersion, structured learning outcomes, and professional support. The modular design allows us to tailor programmes to our students' interests."</p>
+                    <p class="card-text testimonial-quote" style="font-style: italic; margin-bottom: 1.5rem;">"China Quest offers exactly what we look for in educational travel: authentic cultural immersion, structured learning outcomes, and professional support. The modular design allows us to tailor programmes to our students' interests."</p>
                     <p class="card-title" style="margin-bottom: 0.25rem;">Dr. Sarah McKenna</p>
                     <p class="card-text" style="font-size: 13px; color: var(--text-light);">Educational Consultant, International Schools</p>
                 </div>
 
                 <div class="card">
-                    <p class="card-text" style="font-style: italic; margin-bottom: 1.5rem;">"Understanding China is essential for the next generation of global citizens. This programme bridges the gap between classroom learning and real-world understanding in ways that textbooks simply cannot."</p>
+                    <p class="card-text testimonial-quote" style="font-style: italic; margin-bottom: 1.5rem;">"Understanding China is essential for the next generation of global citizens. This programme bridges the gap between classroom learning and real-world understanding in ways that textbooks simply cannot."</p>
                     <p class="card-title" style="margin-bottom: 0.25rem;">James O'Sullivan</p>
                     <p class="card-text" style="font-size: 13px; color: var(--text-light);">TY Coordinator & Geography Teacher</p>
                 </div>
 
                 <div class="card">
-                    <p class="card-text" style="font-style: italic; margin-bottom: 1.5rem;">"The team's deep knowledge of China, combined with their understanding of European education systems, creates a uniquely valuable experience. Safety, learning, and personal growth are clearly prioritised."</p>
+                    <p class="card-text testimonial-quote" style="font-style: italic; margin-bottom: 1.5rem;">"The team's deep knowledge of China, combined with their understanding of European education systems, creates a uniquely valuable experience. Safety, learning, and personal growth are clearly prioritised."</p>
                     <p class="card-title" style="margin-bottom: 0.25rem;">Patricia Chen</p>
                     <p class="card-text" style="font-size: 13px; color: var(--text-light);">Parent & Education Advisor</p>
                 </div>
@@ -1489,8 +1892,15 @@
                     <p class="flow-desc">Tailored itinerary and detailed planning</p>
                 </div>
             </div>
+            
+            <div style="text-align: center; margin: 2rem auto 3rem; max-width: 600px;">
+                <p style="font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
+                    <strong style="color: var(--gold-primary); font-size: 16px;">Programme Pricing: From €2,990</strong><br>
+                    <span style="font-size: 12px;">Starting price for 5-day city module. Multi-module programmes available. All-inclusive pricing covers accommodation, meals, transportation within China, site visits, experienced staff, insurance, and learning materials. International flights and visa fees not included. Custom quotes provided based on group size, duration, and specific requirements.</span>
+                </p>
+            </div>
 
-            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpznqkdl" method="POST">
                 <div class="form-group">
                     <label class="form-label">Name <span class="required">*</span></label>
                     <input type="text" name="name" class="form-input" required>
@@ -1534,7 +1944,9 @@
                     <textarea name="message" class="form-textarea" placeholder="Tell us about your students' interests, group size, or any questions you have..."></textarea>
                 </div>
 
-                <button type="submit" class="form-submit">Send Enquiry</button>
+                <div id="formMessage" style="display: none; margin-bottom: 1rem; padding: 1rem; border-radius: 4px;"></div>
+                
+                <button type="submit" class="form-submit" id="formSubmit">Send Enquiry</button>
             </form>
 
             <div class="contact-info">
@@ -1583,6 +1995,10 @@
                 <p style="margin-top: 0.5rem; font-size: 12px;">
                     Building bridges between cultures through transformative educational experiences
                 </p>
+                <p style="margin-top: 0.75rem; font-size: 12px;">
+                    <a href="#" id="privacyLink" style="color: var(--gold-primary); text-decoration: none; margin-right: 1rem;">Privacy Policy</a>
+                    <a href="#" id="termsLink" style="color: var(--gold-primary); text-decoration: none;">Terms & Conditions</a>
+                </p>
             </div>
         </div>
     </footer>
@@ -1606,17 +2022,27 @@
             });
         });
         
-        // Navbar scroll effect - add scrolled class
+        // Navbar scroll effect - add scrolled class + Back to Top button
+        const backToTopBtn = document.getElementById('backToTop');
+        
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.nav');
             const currentScroll = window.pageYOffset;
             
+            // Navigation scroll effect
             if (currentScroll > 100) {
                 nav.classList.add('scrolled');
                 nav.style.padding = '0.75rem 2rem';
             } else {
                 nav.classList.remove('scrolled');
                 nav.style.padding = '1rem 2rem';
+            }
+            
+            // Back to Top button visibility (show after 100vh)
+            if (currentScroll > window.innerHeight) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
             }
         });
         
@@ -1670,7 +2096,391 @@
                 el.style.transitionDelay = `${index * 0.1}s`;
                 observer.observe(el);
             });
+            
+            // Navigation active state tracking
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+            
+            const navObserverOptions = {
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.getAttribute('id');
+                        
+                        // Remove active class from all nav links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // Add active class to corresponding nav link
+                        const activeLink = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, navObserverOptions);
+            
+            // Observe all sections with IDs
+            sections.forEach(section => {
+                navObserver.observe(section);
+            });
+            
+            // Lazy Loading for Background Images
+            const lazyBgElements = document.querySelectorAll('[data-bg]');
+            
+            const bgObserverOptions = {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            };
+            
+            const bgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const bgUrl = element.getAttribute('data-bg');
+                        
+                        if (bgUrl) {
+                            // Apply background image to ::before pseudo-element via inline style
+                            element.style.setProperty('--lazy-bg', bgUrl);
+                            
+                            // Create a temp style to set the background on ::before
+                            const styleId = 'lazy-bg-' + Array.from(lazyBgElements).indexOf(element);
+                            let style = document.getElementById(styleId);
+                            if (!style) {
+                                style = document.createElement('style');
+                                style.id = styleId;
+                                document.head.appendChild(style);
+                            }
+                            
+                            const className = element.className.split(' ').filter(c => c !== 'dest-header').join('.');
+                            style.textContent = `.dest-header.${className}::before { background-image: ${bgUrl} !important; }`;
+                            
+                            element.removeAttribute('data-bg');
+                            bgObserver.unobserve(element);
+                        }
+                    }
+                });
+            }, bgObserverOptions);
+            
+            // Observe all elements with data-bg
+            lazyBgElements.forEach(el => {
+                bgObserver.observe(el);
+            });
+            
+            // Cookie Banner handling
+            const cookieBanner = document.getElementById('cookieBanner');
+            const cookieAccept = document.getElementById('cookieAccept');
+            const cookieDecline = document.getElementById('cookieDecline');
+            
+            // Check if user has already made a choice
+            if (!localStorage.getItem('cookieConsent')) {
+                // Show banner after a brief delay
+                setTimeout(() => {
+                    cookieBanner.classList.add('visible');
+                }, 1000);
+            }
+            
+            // Accept cookies
+            cookieAccept?.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.classList.remove('visible');
+            });
+            
+            // Decline cookies
+            cookieDecline?.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieBanner.classList.remove('visible');
+            });
+            
+            // Privacy & Terms Modal handling
+            const privacyModal = document.getElementById('privacyModal');
+            const termsModal = document.getElementById('termsModal');
+            const privacyLink = document.getElementById('privacyLink');
+            const termsLink = document.getElementById('termsLink');
+            const cookiePrivacyLink = document.getElementById('cookiePrivacyLink');
+            const privacyClose = document.getElementById('privacyClose');
+            const termsClose = document.getElementById('termsClose');
+            
+            // Open Privacy Policy modal
+            privacyLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                privacyModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Open Privacy from cookie banner
+            cookiePrivacyLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                privacyModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Open Terms & Conditions modal
+            termsLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                termsModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close Privacy modal
+            privacyClose?.addEventListener('click', () => {
+                privacyModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close Terms modal
+            termsClose?.addEventListener('click', () => {
+                termsModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside content
+            privacyModal?.addEventListener('click', (e) => {
+                if (e.target === privacyModal) {
+                    privacyModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            termsModal?.addEventListener('click', (e) => {
+                if (e.target === termsModal) {
+                    termsModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (privacyModal.classList.contains('active')) {
+                        privacyModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                    if (termsModal.classList.contains('active')) {
+                        termsModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+            
+            // Back to Top button click handler
+            const backToTopButton = document.getElementById('backToTop');
+            backToTopButton?.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Form submission handling
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+            const formSubmit = document.getElementById('formSubmit');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    // Disable submit button
+                    formSubmit.disabled = true;
+                    formSubmit.textContent = 'Sending...';
+                    
+                    // Hide previous message
+                    formMessage.style.display = 'none';
+                    
+                    try {
+                        const formData = new FormData(contactForm);
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Success
+                            formMessage.style.display = 'block';
+                            formMessage.style.background = '#D1FAE5';
+                            formMessage.style.color = '#065F46';
+                            formMessage.style.border = '1px solid #6EE7B7';
+                            formMessage.textContent = 'Thank you for your enquiry! We will be in touch within 24 hours.';
+                            contactForm.reset();
+                        } else {
+                            // Error
+                            formMessage.style.display = 'block';
+                            formMessage.style.background = '#FEE2E2';
+                            formMessage.style.color = '#991B1B';
+                            formMessage.style.border = '1px solid #FCA5A5';
+                            formMessage.textContent = 'Oops! There was a problem submitting your form. Please try again or email us directly.';
+                        }
+                    } catch (error) {
+                        // Network error
+                        formMessage.style.display = 'block';
+                        formMessage.style.background = '#FEE2E2';
+                        formMessage.style.color = '#991B1B';
+                        formMessage.style.border = '1px solid #FCA5A5';
+                        formMessage.textContent = 'Connection error. Please check your internet and try again.';
+                    } finally {
+                        // Re-enable submit button
+                        formSubmit.disabled = false;
+                        formSubmit.textContent = 'Send Enquiry';
+                    }
+                });
+            }
         });
     </script>
+    
+    <!-- GDPR Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies. <a href="#privacy" id="cookiePrivacyLink">Learn more</a></p>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accept</button>
+                <button class="cookie-btn cookie-btn-decline" id="cookieDecline">Decline</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <button class="modal-close" id="privacyClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Last updated:</strong> March 2026</p>
+                
+                <h3>1. Introduction</h3>
+                <p>Miles Minds Limited ("we", "us", or "our") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our website.</p>
+                
+                <h3>2. Information We Collect</h3>
+                <p>We may collect the following types of information:</p>
+                <ul>
+                    <li><strong>Contact Information:</strong> Name, email address, phone number, and organization details when you submit an enquiry form</li>
+                    <li><strong>Technical Data:</strong> IP address, browser type, device information, and cookies</li>
+                    <li><strong>Usage Data:</strong> Pages visited, time spent on site, and navigation patterns</li>
+                </ul>
+                
+                <h3>3. How We Use Your Information</h3>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Respond to your enquiries and provide information about our programmes</li>
+                    <li>Improve our website and user experience</li>
+                    <li>Analyze website traffic and user behavior</li>
+                    <li>Comply with legal obligations</li>
+                </ul>
+                
+                <h3>4. Cookies</h3>
+                <p>We use cookies to enhance your browsing experience and understand how you use our site. You can manage your cookie preferences through your browser settings or by using our cookie banner.</p>
+                
+                <h3>5. Third-Party Services</h3>
+                <p>We use the following third-party services:</p>
+                <ul>
+                    <li><strong>Formspree:</strong> For contact form submission and email delivery</li>
+                    <li><strong>Unsplash:</strong> For royalty-free images</li>
+                    <li><strong>Google Fonts:</strong> For web typography</li>
+                </ul>
+                <p>These services may collect data as described in their respective privacy policies.</p>
+                
+                <h3>6. Data Security</h3>
+                <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.</p>
+                
+                <h3>7. Your Rights (GDPR)</h3>
+                <p>Under the General Data Protection Regulation (GDPR), you have the right to:</p>
+                <ul>
+                    <li>Access your personal data</li>
+                    <li>Rectify inaccurate data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Object to processing of your data</li>
+                    <li>Request data portability</li>
+                    <li>Withdraw consent at any time</li>
+                </ul>
+                
+                <h3>8. Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+                <p><strong>Email:</strong> privacy@milesminds.com<br>
+                <strong>Company:</strong> Miles Minds Limited, Ireland</p>
+                
+                <p style="margin-top: 2rem; font-size: 14px; color: var(--text-secondary);">This is a basic privacy policy template. We recommend consulting with legal counsel to ensure full compliance with applicable data protection laws.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <button class="modal-close" id="termsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Last updated:</strong> March 2026</p>
+                
+                <h3>1. Agreement to Terms</h3>
+                <p>By accessing and using this website, you accept and agree to be bound by these Terms & Conditions. If you do not agree to these terms, please do not use this website.</p>
+                
+                <h3>2. Use of Website</h3>
+                <p>You may use this website for lawful purposes only. You agree not to:</p>
+                <ul>
+                    <li>Violate any applicable laws or regulations</li>
+                    <li>Transmit any harmful or malicious code</li>
+                    <li>Attempt to gain unauthorized access to any part of the website</li>
+                    <li>Interfere with or disrupt the website's operation</li>
+                </ul>
+                
+                <h3>3. Intellectual Property</h3>
+                <p>All content on this website, including text, graphics, logos, and images, is the property of Miles Minds Limited or its content suppliers and is protected by international copyright laws.</p>
+                
+                <h3>4. Programme Information</h3>
+                <p>The information provided about our educational programmes is for general informational purposes. Programme details, pricing, and availability are subject to change without notice. We reserve the right to modify or cancel programmes at any time.</p>
+                
+                <h3>5. Third-Party Links</h3>
+                <p>This website may contain links to third-party websites. We are not responsible for the content, privacy policies, or practices of these external sites.</p>
+                
+                <h3>6. Disclaimer of Warranties</h3>
+                <p>This website is provided "as is" without any warranties, express or implied. We do not guarantee that:</p>
+                <ul>
+                    <li>The website will be uninterrupted or error-free</li>
+                    <li>Defects will be corrected</li>
+                    <li>The website is free of viruses or harmful components</li>
+                </ul>
+                
+                <h3>7. Limitation of Liability</h3>
+                <p>Miles Minds Limited shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use this website.</p>
+                
+                <h3>8. Indemnification</h3>
+                <p>You agree to indemnify and hold harmless Miles Minds Limited from any claims, damages, losses, or expenses arising from your use of this website or violation of these Terms & Conditions.</p>
+                
+                <h3>9. Governing Law</h3>
+                <p>These Terms & Conditions are governed by and construed in accordance with the laws of Ireland. Any disputes shall be subject to the exclusive jurisdiction of the courts of Ireland.</p>
+                
+                <h3>10. Changes to Terms</h3>
+                <p>We reserve the right to modify these Terms & Conditions at any time. Changes will be effective immediately upon posting to this website. Your continued use of the website constitutes acceptance of the modified terms.</p>
+                
+                <h3>11. Contact Information</h3>
+                <p>For questions about these Terms & Conditions, please contact us:</p>
+                <p><strong>Email:</strong> legal@milesminds.com<br>
+                <strong>Company:</strong> Miles Minds Limited, Ireland</p>
+                
+                <p style="margin-top: 2rem; font-size: 14px; color: var(--text-secondary);">This is a basic terms & conditions template. We recommend consulting with legal counsel to ensure full compliance and protection of your business interests.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="18 15 12 9 6 15" stroke-linecap="round" stroke-linejoin="round"></polyline>
+        </svg>
+    </button>
 </body>
 </html>
